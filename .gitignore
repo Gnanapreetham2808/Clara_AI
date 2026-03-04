@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# API Keys — never commit these
+.env
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# n8n local data
+.n8n/
+
+# Outputs are committed (they are the deliverable)
+# but keep the gitkeep placeholders meaningful

@@ -1,0 +1,42 @@
+DEMO CALL TRANSCRIPT — Greenfield HVAC Solutions
+Account ID: acct_001
+Date: 2025-01-10
+Participants: Sales Rep (Sarah), Prospect (Mike, Owner)
+
+---
+
+Sarah: Hi Mike, thanks for taking the time today. I'm Sarah from Clara AI. I wanted to walk you through how our virtual receptionist, Clara, could handle your after-hours calls.
+
+Mike: Sure, yeah. We've been struggling with missed calls. We run a heating and cooling company — Greenfield HVAC Solutions — out of here in Denver.
+
+Sarah: Great. And what are your typical business hours?
+
+Mike: We're open Monday through Friday, 8 AM to 5 PM. We're closed on weekends.
+
+Sarah: Perfect. And after hours — do you get emergency calls?
+
+Mike: Oh absolutely. If someone's furnace goes out in January, that's a real emergency. Or if a compressor fails in July heat. We'd define it as anything where there's no heat when it's freezing, or no AC when it's dangerously hot.
+
+Sarah: Makes sense. And who would Clara try to reach in those emergencies?
+
+Mike: It would go to our on-call technician. We rotate that weekly. Right now the on-call number is 720-555-0147. If that doesn't work, it would go to me — 720-555-0198.
+
+Sarah: Got it. How long should Clara wait before trying the next number?
+
+Mike: Honestly, I'd want her to wait about 30 seconds. If no one picks up in 30 seconds, try the next person.
+
+Sarah: And what services do you offer? I want to make sure Clara captures that for callers.
+
+Mike: We do residential and commercial HVAC — installation, repair, maintenance contracts. We also do duct cleaning. That's basically it.
+
+Sarah: Is there a main office number where business-hours calls should be transferred?
+
+Mike: Yep, that's 720-555-0100. That rings the front desk.
+
+Sarah: What city or address should we use?
+
+Mike: We're at 1420 Larimer Street, Denver, Colorado. The timezone is Mountain Time.
+
+Sarah: Perfect. This gives me a great starting point, Mike. I'll put together the initial draft and you can confirm the details during onboarding.
+
+Mike: Sounds good. Thanks Sarah.

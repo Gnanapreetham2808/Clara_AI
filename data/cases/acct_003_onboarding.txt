@@ -1,0 +1,32 @@
+ONBOARDING TRANSCRIPT — Metro Electrical Group
+Account ID: acct_003
+Date: 2025-01-18
+Participants: Onboarding Specialist (Priya), Angela Morris (Owner), Ray (Office Manager)
+
+---
+
+Priya: Hi Angela, hi Ray! Let's lock in your Clara configuration.
+
+Angela: Sure. Company name is "Metro Electrical Group" — no "Inc" needed for callers.
+
+Ray: Address is 8800 S. Cicero Ave, Suite 300, Chicago, IL 60652. Central Time — America/Chicago.
+
+Priya: Business hours?
+
+Ray: Monday through Friday, 7 AM to 5 PM. We decided to add Saturday: 8 AM to noon officially.
+
+Priya: Emergency routing — 312-555-0175 then 312-555-0199 at 30 seconds?
+
+Angela: Correct. If both fail, 30 seconds fallback message is fine. Add: "If you smell burning or see sparking, please call 911 immediately."
+
+Priya: Good safety instruction. Retries?
+
+Angela: Try each number once. Then take message.
+
+Priya: CRM or ticketing?
+
+Ray: We use ServiceTitan. Collect name, phone, service address, and type of electrical issue. Ask if they've already called ComEd to check for utility outages.
+
+Priya: Constraints?
+
+Angela: No price quotes. Never say a specific technician's name — just "one of our licensed electricians." If caller mentions a competitor, don't engage — just redirect to booking.

@@ -1,0 +1,30 @@
+DEMO CALL TRANSCRIPT — Sunshine Property Management
+Account ID: acct_004
+Date: 2025-01-13
+Participants: Sales Rep (James), Prospect (Carla Nguyen, Director of Operations)
+
+---
+
+James: Hi Carla, tell me about Sunshine Property Management.
+
+Carla: We manage residential properties across the Phoenix metro area — about 800 units across 15 communities. We handle tenant calls for maintenance, lease inquiries, and emergencies.
+
+James: What counts as an emergency for a property management company?
+
+Carla: No heat or AC when temperatures are extreme, flooding, gas leaks, sewage backup, fire-related issues, lockouts when it's a safety concern, and broken exterior doors or windows that compromise security.
+
+James: What are your office hours?
+
+Carla: Monday through Friday, 8 AM to 5 PM Arizona time — we don't observe daylight saving in Arizona, so it's always MST.
+
+James: After-hours emergency routing?
+
+Carla: We have a maintenance hotline: 602-555-0155. That's monitored by our on-call property manager. If they don't answer in 45 seconds, escalate to our emergency coordinator at 602-555-0199.
+
+James: Services beyond maintenance?
+
+Carla: Lease inquiries, move-in/move-out scheduling, noise complaints — but those are all business-hours only. After hours, only emergencies.
+
+James: Any special instructions?
+
+Carla: For tenant lockouts — we need to verify they're actually a resident before dispatching. Clara should collect unit number, name on the lease, and DOB to verify.

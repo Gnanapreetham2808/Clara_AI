@@ -1,0 +1,391 @@
+{
+    "name": "Clara Answers Pipeline",
+    "nodes": [
+        {
+            "parameters": {},
+            "id": "a1b2c3d4-0001-0001-0001-000000000001",
+            "name": "Manual Trigger",
+            "type": "n8n-nodes-base.manualTrigger",
+            "typeVersion": 1,
+            "position": [
+                240,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "id": "field-001",
+                            "name": "accounts",
+                            "value": "[\"acct_001\",\"acct_002\",\"acct_003\",\"acct_004\",\"acct_005\"]",
+                            "type": "string"
+                        },
+                        {
+                            "id": "field-002",
+                            "name": "scripts_dir",
+                            "value": "/data/scripts",
+                            "type": "string"
+                        },
+                        {
+                            "id": "field-003",
+                            "name": "cases_dir",
+                            "value": "/data/data/cases",
+                            "type": "string"
+                        },
+                        {
+                            "id": "field-004",
+                            "name": "gemini_api_key",
+                            "value": "={{ $env.GEMINI_API_KEY }}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "a1b2c3d4-0002-0002-0002-000000000002",
+            "name": "Set Config",
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.3,
+            "position": [
+                460,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "fieldToSplitOut": "accounts",
+                "options": {}
+            },
+            "id": "a1b2c3d4-0003-0003-0003-000000000003",
+            "name": "Split Into Accounts",
+            "type": "n8n-nodes-base.splitOut",
+            "typeVersion": 1,
+            "position": [
+                680,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "command": "=cd {{ $json.scripts_dir }} && GEMINI_API_KEY={{ $json.gemini_api_key }} python3 parser.py --transcript {{ $json.cases_dir }}/{{ $json.accounts }}_demo.txt --account_id {{ $json.accounts }} --source demo_transcript --version v1"
+            },
+            "id": "a1b2c3d4-0004-0004-0004-000000000004",
+            "name": "Run Parser (Demo Transcript)",
+            "type": "n8n-nodes-base.executeCommand",
+            "typeVersion": 1,
+            "position": [
+                900,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "command": "=cd {{ $json.scripts_dir }} && GEMINI_API_KEY={{ $json.gemini_api_key }} python3 v1_generator.py --account_id {{ $json.accounts }}"
+            },
+            "id": "a1b2c3d4-0005-0005-0005-000000000005",
+            "name": "Run v1 Generator",
+            "type": "n8n-nodes-base.executeCommand",
+            "typeVersion": 1,
+            "position": [
+                1120,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "cond-001",
+                            "leftValue": "={{ $json.returnCode }}",
+                            "rightValue": 0,
+                            "operator": {
+                                "type": "number",
+                                "operation": "equals"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "a1b2c3d4-0006-0006-0006-000000000006",
+            "name": "v1 Success?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                1340,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "resource": "issue",
+                "owner": "={{ $env.GITHUB_OWNER }}",
+                "repository": "clara-onboarding-pipeline",
+                "title": "=✅ v1 Generated — {{ $json.accounts }}",
+                "body": "=## Clara Pipeline — v1 Generated\n\n**Account:** `{{ $json.accounts }}`\n**Status:** v1 spec generated from demo transcript\n**Next Step:** Trigger onboarding pipeline (Pipeline B) after onboarding call.\n\n### Files Generated\n- `outputs/accounts/{{ $json.accounts }}/v1/v1_memo.json`\n- `outputs/accounts/{{ $json.accounts }}/v1/v1_agent_spec.json`\n- `outputs/accounts/{{ $json.accounts }}/v1/v1_prompt.txt`\n\n_Auto-created by Clara Pipeline n8n workflow_",
+                "labels": {
+                    "label": [
+                        {
+                            "label": "v1-generated"
+                        },
+                        {
+                            "label": "awaiting-onboarding"
+                        }
+                    ]
+                }
+            },
+            "id": "a1b2c3d4-0007-0007-0007-000000000007",
+            "name": "Create GitHub Issue (v1)",
+            "type": "n8n-nodes-base.github",
+            "typeVersion": 1,
+            "position": [
+                1560,
+                200
+            ],
+            "credentials": {
+                "githubApi": {
+                    "id": "github-cred-01",
+                    "name": "GitHub API"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "resource": "issue",
+                "owner": "={{ $env.GITHUB_OWNER }}",
+                "repository": "clara-onboarding-pipeline",
+                "title": "=❌ v1 FAILED — {{ $json.accounts }}",
+                "body": "=## Clara Pipeline — v1 Generation FAILED\n\n**Account:** `{{ $json.accounts }}`\n**Error output:**\n```\n{{ $json.stderr }}\n```\n\n_Auto-created by Clara Pipeline n8n workflow_",
+                "labels": {
+                    "label": [
+                        {
+                            "label": "error"
+                        }
+                    ]
+                }
+            },
+            "id": "a1b2c3d4-0008-0008-0008-000000000008",
+            "name": "Create GitHub Issue (v1 Error)",
+            "type": "n8n-nodes-base.github",
+            "typeVersion": 1,
+            "position": [
+                1560,
+                420
+            ],
+            "credentials": {
+                "githubApi": {
+                    "id": "github-cred-01",
+                    "name": "GitHub API"
+                }
+            }
+        },
+        {
+            "parameters": {},
+            "id": "a1b2c3d4-0009-0009-0009-000000000009",
+            "name": "Webhook Trigger (Onboarding)",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                240,
+                700
+            ],
+            "webhookId": "clara-onboarding-webhook"
+        },
+        {
+            "parameters": {
+                "command": "=cd {{ $json.body.scripts_dir }} && GEMINI_API_KEY={{ $env.GEMINI_API_KEY }} python3 v2_merger.py --account_id {{ $json.body.account_id }} --onboarding {{ $json.body.cases_dir }}/{{ $json.body.account_id }}_onboarding.txt --source onboarding_transcript"
+            },
+            "id": "a1b2c3d4-0010-0010-0010-000000000010",
+            "name": "Run v2 Merger",
+            "type": "n8n-nodes-base.executeCommand",
+            "typeVersion": 1,
+            "position": [
+                460,
+                700
+            ]
+        },
+        {
+            "parameters": {
+                "command": "=cd {{ $json.body.scripts_dir }} && python3 reporter.py --account_id {{ $json.body.account_id }}"
+            },
+            "id": "a1b2c3d4-0011-0011-0011-000000000011",
+            "name": "Run Reporter",
+            "type": "n8n-nodes-base.executeCommand",
+            "typeVersion": 1,
+            "position": [
+                680,
+                700
+            ]
+        },
+        {
+            "parameters": {
+                "resource": "issue",
+                "owner": "={{ $env.GITHUB_OWNER }}",
+                "repository": "clara-onboarding-pipeline",
+                "title": "=✅ v2 Complete — {{ $json.body.account_id }}",
+                "body": "=## Clara Pipeline — v2 Generated\n\n**Account:** `{{ $json.body.account_id }}`\n**Status:** v2 spec generated from onboarding transcript\n\n### Files Generated\n- `outputs/accounts/{{ $json.body.account_id }}/v2/v2_memo.json`\n- `outputs/accounts/{{ $json.body.account_id }}/v2/v2_agent_spec.json`\n- `outputs/accounts/{{ $json.body.account_id }}/v2/v2_prompt.txt`\n- `outputs/accounts/{{ $json.body.account_id }}/v2/changes.json`\n- `outputs/accounts/{{ $json.body.account_id }}/v2/unknowns_report.md`\n- `changelog/{{ $json.body.account_id }}_changelog.md`\n\n### Review Checklist\n- [ ] Review unknowns_report.md\n- [ ] Check changes.json for any conflict resolutions\n- [ ] Validate v2_prompt.txt — replace all [UNKNOWN] markers\n- [ ] Import v2_agent_spec.json into Retell\n\n_Auto-created by Clara Pipeline n8n workflow_",
+                "labels": {
+                    "label": [
+                        {
+                            "label": "v2-complete"
+                        },
+                        {
+                            "label": "ready-for-review"
+                        }
+                    ]
+                }
+            },
+            "id": "a1b2c3d4-0012-0012-0012-000000000012",
+            "name": "Create GitHub Issue (v2 Complete)",
+            "type": "n8n-nodes-base.github",
+            "typeVersion": 1,
+            "position": [
+                900,
+                700
+            ],
+            "credentials": {
+                "githubApi": {
+                    "id": "github-cred-01",
+                    "name": "GitHub API"
+                }
+            }
+        }
+    ],
+    "connections": {
+        "Manual Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Set Config",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Set Config": {
+            "main": [
+                [
+                    {
+                        "node": "Split Into Accounts",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Split Into Accounts": {
+            "main": [
+                [
+                    {
+                        "node": "Run Parser (Demo Transcript)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Run Parser (Demo Transcript)": {
+            "main": [
+                [
+                    {
+                        "node": "Run v1 Generator",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Run v1 Generator": {
+            "main": [
+                [
+                    {
+                        "node": "v1 Success?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "v1 Success?": {
+            "main": [
+                [
+                    {
+                        "node": "Create GitHub Issue (v1)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Create GitHub Issue (v1 Error)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Webhook Trigger (Onboarding)": {
+            "main": [
+                [
+                    {
+                        "node": "Run v2 Merger",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Run v2 Merger": {
+            "main": [
+                [
+                    {
+                        "node": "Run Reporter",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Run Reporter": {
+            "main": [
+                [
+                    {
+                        "node": "Create GitHub Issue (v2 Complete)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "staticData": null,
+    "tags": [
+        {
+            "id": "tag-001",
+            "name": "clara-pipeline"
+        },
+        {
+            "id": "tag-002",
+            "name": "onboarding"
+        }
+    ],
+    "meta": {
+        "templateCredsSetupCompleted": false,
+        "n8nVersion": "1.43.0"
+    },
+    "id": "clara-pipeline-001",
+    "versionId": "v1.0.0"
+}

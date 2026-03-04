@@ -1,0 +1,36 @@
+ONBOARDING TRANSCRIPT — PrecisionCool Refrigeration
+Account ID: acct_005
+Date: 2025-01-20
+Participants: Onboarding Specialist (Priya), Derek Walsh (Owner), Maria (Admin)
+
+---
+
+Priya: Hi Derek, hi Maria! Let's finalize PrecisionCool's Clara setup.
+
+Maria: Official name for callers: "PrecisionCool Refrigeration Services."
+
+Derek: That's right. Address is 1100 Brickell Bay Drive, Suite 800, Miami, FL 33131. Eastern Time — America/New_York.
+
+Priya: Hours: Monday–Friday, 7 AM to 4 PM?
+
+Derek: Update that — we added Friday afternoon. Now it's Monday through Friday, 7 AM to 5 PM. No weekend hours.
+
+Priya: Emergency routing: 305-555-0177, 25 seconds, then Derek at 305-555-0199, then Carlos at 305-555-0211?
+
+Derek: Correct. Timeout stays at 25 seconds between each attempt. Single call per number.
+
+Priya: If all three fail?
+
+Derek: Tell them we'll call back within one hour, and to call 305-555-0188 — that's our 24/7 answering service line as final fallback.
+
+Priya: Integration?
+
+Maria: We use FieldEdge for service management. Clara should collect: company name, contact name, phone, service address, unit type (walk-in cooler, freezer, ice machine, etc.), and whether they have food currently at risk.
+
+Priya: That last point about food at risk — escalation priority?
+
+Derek: Yes. If they say they have perishable food at risk, that moves it to highest priority. Mention that in the message Clara records.
+
+Priya: Constraints?
+
+Maria: Don't quote emergency service fees. Don't promise specific arrival times — just "our team will contact you within one hour." Don't mention competitor brands by name.

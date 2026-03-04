@@ -1,0 +1,36 @@
+ONBOARDING TRANSCRIPT — Sunshine Property Management
+Account ID: acct_004
+Date: 2025-01-19
+Participants: Onboarding Specialist (Priya), Carla Nguyen (Director Ops), Ben (IT/Systems)
+
+---
+
+Priya: Hi Carla, hi Ben! Let's finalize the Clara agent setup.
+
+Carla: Sure. Name for callers: "Sunshine Property Management." 
+
+Ben: Address is 2525 E. Camelback Road, Suite 700, Phoenix, AZ 85016. Timezone is America/Phoenix — no daylight saving.
+
+Priya: Business hours: Monday–Friday, 8 AM to 5 PM?
+
+Carla: Confirmed. No changes there.
+
+Priya: Emergency routing: 602-555-0155, timeout 45 seconds, then 602-555-0199?
+
+Carla: Yes. But — update the timeout to 40 seconds. 45 felt too long in testing. And add: if both fail, Clara should say "We've received your emergency and our on-call team has been paged. You will receive a callback within 20 minutes."
+
+Priya: Single retry per number?
+
+Ben: Yes, call each number once only.
+
+Priya: For lockouts — Clara collects unit number, name on lease, and DOB?
+
+Carla: Correct. Also collect their phone number separately because the number they call from might not be their registered number.
+
+Priya: CRM or ticketing system?
+
+Ben: We use Yardi Voyager. Clara can't integrate directly. Collect: tenant name, unit number, community name, phone, and issue description. We'll create the maintenance ticket manually.
+
+Priya: Constraints?
+
+Carla: Never discuss eviction procedures on calls. Never discuss lease terms or pricing. If tenant is distressed or threatening, de-escalate and offer to arrange a callback from the property manager.

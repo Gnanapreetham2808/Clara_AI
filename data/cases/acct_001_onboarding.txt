@@ -1,0 +1,52 @@
+ONBOARDING CALL TRANSCRIPT — Greenfield HVAC Solutions
+Account ID: acct_001
+Date: 2025-01-16
+Participants: Onboarding Specialist (Priya), Client (Mike, Owner), Client (Lisa, Office Manager)
+
+---
+
+Priya: Hi Mike, hi Lisa! Thanks for joining the onboarding call. We're going to confirm all the details for your Clara agent today.
+
+Mike: Perfect. Lisa handles the day-to-day so she'll have most of the specifics.
+
+Priya: Great. Lisa, can you confirm the company name as it should appear to callers?
+
+Lisa: Yes — it's "Greenfield HVAC Solutions." Officially it's "Greenfield HVAC Solutions LLC" but just say "Greenfield HVAC Solutions" to callers.
+
+Priya: Got it. Business hours?
+
+Lisa: Monday through Friday, 7:30 AM to 5:30 PM Mountain Time. We updated it — we now open at 7:30, not 8. Saturdays we're open 9 AM to 1 PM for emergency dispatch only, but the office phones go to Clara. Sundays closed.
+
+Priya: Perfect. So that's a change from the original 8 to 5 — noted. What timezone?
+
+Lisa: Mountain Time — America/Denver.
+
+Priya: Office address?
+
+Lisa: 1420 Larimer Street, Suite 200, Denver, CO 80202.
+
+Priya: Mike had mentioned the on-call emergency number as 720-555-0147. Is that still current?
+
+Lisa: Yes that's Dave's number. He's on-call through end of January. Then it rotates to Jamie — 720-555-0163. The fallback is always Mike: 720-555-0198.
+
+Priya: And the timeout before trying the next number?
+
+Mike: 30 seconds is fine.
+
+Priya: What should Clara say — or do — if all transfer attempts fail?
+
+Lisa: Tell the caller their information has been recorded and someone will call back within 15 minutes. That's our SLA.
+
+Priya: Great. For non-emergencies after hours?
+
+Lisa: Collect their name, phone, and a description of the issue. Tell them we'll call back next business day. Don't promise same-night callback unless it's an emergency.
+
+Priya: Any integration constraints we should know about — CRM, ticketing system?
+
+Lisa: We use ServiceTitan. Calls don't integrate directly, but Clara should collect enough information to manually create a job ticket: customer name, address, phone, and type of issue.
+
+Priya: Understood. Anything else?
+
+Mike: Make sure Clara never quotes prices. If someone asks about cost, she should say "our technician will provide a quote during the service call."
+
+Priya: Absolutely — I'll add that as a constraint. You're all set. I'll have your v2 spec ready within the hour.

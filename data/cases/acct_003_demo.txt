@@ -1,0 +1,34 @@
+DEMO CALL TRANSCRIPT — Metro Electrical Group
+Account ID: acct_003
+Date: 2025-01-12
+Participants: Sales Rep (James), Prospect (Angela Morris, Owner)
+
+---
+
+James: Hi Angela, great to meet you. Tell me about Metro Electrical Group.
+
+Angela: We're a licensed electrical contractor out of Chicago. We do commercial, industrial, and some high-end residential. Panel upgrades, generator installations, emergency electrical work.
+
+James: What are your hours?
+
+Angela: Weekdays, 7 AM to 5 PM Central. We don't officially do weekends but we get emergency calls constantly.
+
+James: How do you define an emergency electrically?
+
+Angela: Power outages to a business, sparking or burning smell, tripped breakers that won't reset, downed power lines near property, anything that's a safety hazard.
+
+James: And who handles the after-hours emergency calls?
+
+Angela: It rotates but right now call 312-555-0175 — that's our after-hours emergency line. If no answer, call me directly at 312-555-0199. Timeout should be 30 seconds.
+
+James: And if both fail?
+
+Angela: Tell them to call ComEd if it's a utility issue. For on-property emergencies, take their info and tell them someone calls back within 20 minutes.
+
+James: Services offered?
+
+Angela: Panel upgrades, generator install and service, EV charger installation, emergency electrical repair, commercial lighting, data cabling, fire alarm systems.
+
+James: Any pricing constraints?
+
+Angela: Don't quote any prices. Electrical is highly variable — always say "we'll provide a comprehensive quote after assessment."

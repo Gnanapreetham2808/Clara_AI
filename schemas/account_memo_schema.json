@@ -1,0 +1,49 @@
+{
+  "account_id": "string",
+  "version": "v1 | v2",
+  "generated_from": "demo_transcript | onboarding_transcript | onboarding_form",
+  "company_name": "string | null",
+  "business_hours": {
+    "value": {
+      "monday": {"open": "HH:MM", "close": "HH:MM"},
+      "tuesday": {"open": "HH:MM", "close": "HH:MM"},
+      "wednesday": {"open": "HH:MM", "close": "HH:MM"},
+      "thursday": {"open": "HH:MM", "close": "HH:MM"},
+      "friday": {"open": "HH:MM", "close": "HH:MM"},
+      "saturday": {"open": "HH:MM", "close": "HH:MM"},
+      "sunday": {"open": "HH:MM", "close": "HH:MM"}
+    },
+    "status": "confirmed | assumed | unknown",
+    "source": "demo | onboarding"
+  },
+  "timezone": {"value": null, "status": "unknown", "source": null},
+  "office_address": {"value": null, "status": "unknown", "source": null},
+  "services_supported": {"value": [], "status": "unknown", "source": null},
+  "emergency_definition": {"value": [], "status": "unknown", "source": null},
+  "emergency_routing_rules": {
+    "value": {
+      "primary": null,
+      "order": [],
+      "fallback": null,
+      "collect_before_transfer": ["name", "phone", "address"]
+    },
+    "status": "unknown",
+    "source": null
+  },
+  "non_emergency_routing_rules": {"value": {}, "status": "unknown", "source": null},
+  "call_transfer_rules": {
+    "value": {
+      "timeout_seconds": null,
+      "retries": null,
+      "fail_action": null
+    },
+    "status": "unknown",
+    "source": null
+  },
+  "integration_constraints": {"value": [], "status": "unknown", "source": null},
+  "after_hours_flow_summary": {"value": null, "status": "unknown", "source": null},
+  "office_hours_flow_summary": {"value": null, "status": "unknown", "source": null},
+  "questions_or_unknowns": [],
+  "change_log": [],
+  "notes": ""
+}

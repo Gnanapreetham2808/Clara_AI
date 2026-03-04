@@ -1,0 +1,34 @@
+DEMO CALL TRANSCRIPT — Riverside Plumbing & Drain
+Account ID: acct_002
+Date: 2025-01-11
+Participants: Sales Rep (Sarah), Prospect (Tom Chen, Operations Manager)
+
+---
+
+Sarah: Hi Tom, thanks for connecting. Tell me a bit about your business.
+
+Tom: Sure. Riverside Plumbing & Drain — we're based in Sacramento. We handle residential and commercial plumbing, drain cleaning, water heater installation and repair, and we do an emergency leak service 24/7.
+
+Sarah: Great. What are your office hours?
+
+Tom: We're in the office Monday to Saturday, 7 AM to 6 PM Pacific Time.
+
+Sarah: And you mentioned 24/7 emergency coverage. How do you define an emergency?
+
+Tom: Active leaks, burst pipes, sewage backup into the home, no hot water in winter — anything that can cause property damage or is a health hazard.
+
+Sarah: Who does Clara route emergencies to after hours?
+
+Tom: We have a dedicated emergency line — 916-555-0222. That goes to whoever is on dispatch that night. If no answer after 20 seconds, it routes to our senior technician Jake at 916-555-0311.
+
+Sarah: And what should happen if both fail?
+
+Tom: Tell them we've paged the team and to call back in 10 minutes if truly urgent. We're a small team so sometimes there's a brief gap.
+
+Sarah: Makes sense. Business-hours transfers go to the front desk?
+
+Tom: Yes, main office is 916-555-0100.
+
+Sarah: Any services to avoid promising?
+
+Tom: Don't promise same-day availability. We're often booked. Just say someone will follow up to schedule.
