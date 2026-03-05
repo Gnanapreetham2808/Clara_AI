@@ -1,0 +1,5 @@
+# Clara Answers Pipeline — Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Google Gemini API (LLM for transcript extraction)
+google-generativeai>=0.5.0

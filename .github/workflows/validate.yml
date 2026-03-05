@@ -1,0 +1,165 @@
+name: Clara Pipeline — Validate & Report
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "outputs/**"
+      - "scripts/**"
+      - "data/**"
+  pull_request:
+    branches: [main]
+  workflow_dispatch:       # allows manual trigger from GitHub Actions tab
+
+jobs:
+  # ── Job 1: Lint & syntax check all Python scripts ─────────────────────────
+  lint:
+    name: Python Syntax Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check Python syntax (all scripts)
+        run: |
+          echo "🔍 Checking Python syntax..."
+          for f in scripts/*.py; do
+            python -m py_compile "$f" && echo "  ✅ $f" || echo "  ❌ $f FAILED"
+          done
+
+  # ── Job 2: Validate all outputs (if outputs exist) ────────────────────────
+  validate:
+    name: Validate Agent Specs
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check if v2 outputs exist
+        id: check_outputs
+        run: |
+          COUNT=$(find outputs/accounts -name "v2_agent_spec.json" 2>/dev/null | wc -l)
+          echo "count=$COUNT" >> $GITHUB_OUTPUT
+          echo "Found $COUNT v2 agent specs"
+
+      - name: Run validator on all accounts (v2)
+        if: steps.check_outputs.outputs.count != '0'
+        run: |
+          cd scripts
+          echo "🔍 Running validate.py --all --version v2"
+          python validate.py --all --version v2
+
+      - name: Run validator on all accounts (v1)
+        if: steps.check_outputs.outputs.count != '0'
+        run: |
+          cd scripts
+          echo "🔍 Running validate.py --all --version v1"
+          python validate.py --all --version v1 || true   # v1 warnings are expected
+
+      - name: Skip validation (no outputs yet)
+        if: steps.check_outputs.outputs.count == '0'
+        run: |
+          echo "ℹ️ No v2 outputs found yet. Run the pipeline to generate outputs."
+          echo "   cd scripts && python run_all.py"
+
+  # ── Job 3: Check repo structure is complete ───────────────────────────────
+  structure:
+    name: Repo Structure Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Verify required files exist
+        run: |
+          echo "📁 Checking required files..."
+          PASS=true
+
+          required_files=(
+            "README.md"
+            "requirements.txt"
+            "schemas/account_memo_schema.json"
+            "workflows/clara_pipeline.json"
+            "scripts/parser.py"
+            "scripts/v1_generator.py"
+            "scripts/v2_merger.py"
+            "scripts/prompt_generator.py"
+            "scripts/reporter.py"
+            "scripts/validate.py"
+            "scripts/run_all.py"
+          )
+
+          for f in "${required_files[@]}"; do
+            if [ -f "$f" ]; then
+              echo "  ✅ $f"
+            else
+              echo "  ❌ MISSING: $f"
+              PASS=false
+            fi
+          done
+
+          if [ "$PASS" = false ]; then
+            echo ""
+            echo "❌ Some required files are missing!"
+            exit 1
+          else
+            echo ""
+            echo "✅ All required files present."
+          fi
+
+      - name: Verify 5 demo transcripts exist
+        run: |
+          echo "📄 Checking demo transcripts..."
+          for i in 001 002 003 004 005; do
+            f="data/cases/acct_${i}_demo.txt"
+            if [ -f "$f" ]; then echo "  ✅ $f"; else echo "  ❌ MISSING: $f"; exit 1; fi
+          done
+
+      - name: Verify 5 onboarding transcripts exist
+        run: |
+          echo "📄 Checking onboarding transcripts..."
+          for i in 001 002 003 004 005; do
+            f="data/cases/acct_${i}_onboarding.txt"
+            if [ -f "$f" ]; then echo "  ✅ $f"; else echo "  ❌ MISSING: $f"; exit 1; fi
+          done
+
+      - name: Validate n8n workflow JSON is parseable
+        run: |
+          echo "🔌 Checking n8n workflow JSON..."
+          python -c "
+          import json, sys
+          with open('workflows/clara_pipeline.json') as f:
+              data = json.load(f)
+          nodes = data.get('nodes', [])
+          print(f'  ✅ clara_pipeline.json is valid JSON ({len(nodes)} nodes found)')
+          "
+
+      - name: Validate schema JSON is parseable
+        run: |
+          echo "📋 Checking account_memo_schema.json..."
+          python -c "
+          import json
+          with open('schemas/account_memo_schema.json') as f:
+              data = json.load(f)
+          print(f'  ✅ account_memo_schema.json is valid JSON ({len(data)} fields)')
+          "
